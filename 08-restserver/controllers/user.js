@@ -55,10 +55,10 @@ const patchUser = (req, res = response) => {
 
 }
 
-const deleteUser = (req, res = response) => {
+const deleteUser = async (req, res = response) => {
     const { id } = req.params
 
-    const user = User.findByIdAndUpdate(id, { status: false })
+    const user = await User.findByIdAndUpdate(id, { status: false })
     
     res.json({ msg: 'user deleted', user })
 

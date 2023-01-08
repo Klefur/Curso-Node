@@ -1,10 +1,10 @@
-const { response } = require('express')
+const { request, response } = require('express')
 const bcrypt = require('bcrypt')
 
 const User = require('../models/user')
 const { generarJWT } = require('../helpers/generar-jwt')
 
-const login = async (req, res = response) => {
+const login = async (req = request, res = response) => {
     const { email, password } = req.body
     try{
         const user = await User.findOne({ email })
@@ -22,9 +22,8 @@ const login = async (req, res = response) => {
         }
         
         const token = await generarJWT( user.id )
-
-        res.json({ user, token })
-
+        res.json({ user , token })
+        
     } catch ( err ) {
         throw err
     }

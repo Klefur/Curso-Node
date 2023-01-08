@@ -10,14 +10,14 @@ const rolValidator = async ( rol = '' ) => {
 
 const existeEmail = async ( email = '' ) => {
     const existeEmail = await User.findOne({ email })
-    if (existeEmail) {
+    if ( existeEmail ) {
         throw new Error(`Ya existe el email ${email}`)
     }
 }
 
 const existeUserID = async ( id = '' ) => {
     const existeUser = await User.findById(id)
-    if (existeUser) {
+    if ( !existeUser ) {
         throw new Error(`No existe el usuario con id ${id}`)
     }
 }
