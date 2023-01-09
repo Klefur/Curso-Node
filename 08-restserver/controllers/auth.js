@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt')
 
 const User = require('../models/user')
 const { generarJWT } = require('../helpers/generar-jwt')
+const { googleVerify } = require('../helpers/google-verify')
 
 const login = async (req = request, res = response) => {
     const { email, password } = req.body
@@ -29,6 +30,23 @@ const login = async (req = request, res = response) => {
     }
 }
 
+const googleSignIn = async (req, res = response) => {
+    const { id_token } = req.body
+
+    try {
+        const googleUser = await googleVerify( id_token )
+        
+        res.json({
+            msg: 'Todo ok',
+            id_token
+        })
+    } catch ( err ) {
+        res.status(400).json({ ok: false, msg: 'El token no se puede verificar' })
+    }
+
+}
+
 module.exports = {
-    login
+    login,
+    googleSignIn
 }
