@@ -1,7 +1,7 @@
 const Rol = require('../models/rol')
 const User = require('../models/user')
 
-const rolValidator = async ( rol = '' ) => {
+const rolValidator = async ( rol = 'user' ) => {
     const existeRol = await Rol.findOne({ rol })
     if ( !existeRol ) {
         throw new Error(`El rol ${rol} no es valido`)

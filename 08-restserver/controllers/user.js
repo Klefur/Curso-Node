@@ -25,7 +25,7 @@ const getUser = async (req, res = response) => {
 
 const postUser = async (req, res = response) => {
 
-    const { name, email, password, rol, status = true, google = false } = req.body
+    const { name, email, password, rol, status, google } = req.body
     const encryptPass = await bcrypt.hash( password, 10 )
     const user = new User({ name, email, password: encryptPass, rol, status, google})
 
