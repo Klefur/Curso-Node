@@ -13,6 +13,7 @@ class Server {
             auth: '/api/auth',
             category: '/api/categories',
             product: '/api/products',
+            search: 'api/search'
         }
 
         // conexion DB
