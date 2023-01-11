@@ -2,8 +2,7 @@ require('dotenv').config()
 require('../routes/user')
 const express = require('express')
 const cors = require('cors')
-const userRouter = require('../routes/user')
-const authRouter = require('../routes/auth')
+const { userRouter, authRouter, categoryRouter } = require('../routes')
 const { dbConnection } = require('../database/config')
 
 class Server {
@@ -12,7 +11,8 @@ class Server {
         this.app = express()
         this.paths = {
             user: '/api/users',
-            auth: '/api/auth'
+            auth: '/api/auth',
+            category: '/api/categories'
         }
 
         // conexion DB
@@ -39,6 +39,7 @@ class Server {
     routes() {
         this.app.use(this.paths.user, userRouter)
         this.app.use(this.paths.auth, authRouter)
+        this.app.use(this.paths.category, categoryRouter)
     }
 
     listen() {

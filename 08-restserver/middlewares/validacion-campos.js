@@ -9,11 +9,7 @@ const validacionCampos = (req, res = response, next) => {
     }
 
     next()
-}
-
-const validacionEstados = (req, res = response, next) => {
-    const { status, google } = req
-}
+}   
 
 module.exports = {
     validacionCampos

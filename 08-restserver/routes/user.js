@@ -26,6 +26,7 @@ router.get('/', getUsers)
 router.get('/:id',[
     check('id', 'El id no es valido').isMongoId(),
     check('id').custom( existeUserID ),
+    validacionCampos
 ], getUser)
 
 router.post('/',[
@@ -45,11 +46,6 @@ router.put('/:id',[
     check('rol').custom( rolValidator ),
     validacionCampos,
 ],  putUser)
-
-router.patch('/:id',[
-    check('id', 'El id no es valido').isMongoId(),
-    check('id').custom( existeUserID ),
-],  patchUser)
 
 router.delete('/:id',[
     validacionJWT,

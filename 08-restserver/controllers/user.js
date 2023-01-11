@@ -1,12 +1,12 @@
 const { response } = require('express')
 const bcrypt = require('bcrypt')
-const User = require('../models/user')
+const { User } = require('../models')
 
 const getUsers = async (req, res = response) => {
     const { page=1, page_size=10 } = req.query
     const estado = { status: true }
     
-    const [ total, users] = await Promise.all([
+    const [ total, users ] = await Promise.all([
         User.count( estado ),
         User.find( estado )
             .limit( Number( page_size ) )
@@ -48,11 +48,6 @@ const putUser = async (req, res = response) => {
     const user = await User.findByIdAndUpdate(id, resto)
 
     res.json(user)
-}
-
-const patchUser = (req, res = response) => {
-    res.json({ msg: 'user patched' })
-
 }
 
 const deleteUser = async (req, res = response) => {
