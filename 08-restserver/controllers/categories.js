@@ -14,7 +14,7 @@ const postCategory = async (req, res = response) => {
     
     const data = {
         name,
-        user: req.user.uid
+        user: req.user._id
     }
 
     const category = new Category( data )
@@ -25,7 +25,7 @@ const postCategory = async (req, res = response) => {
 
 }
 
-const getCategories= async (req, res) => {
+const getCategories= async (req, res = response) => {
     const { page=1, page_size=10 } = req.query
     const estado = { status: true }
 
@@ -43,28 +43,32 @@ const getCategories= async (req, res) => {
     })
 }
 
-const getCategory= async (req, res) => {
-    const { id } = req.body
+const getCategory= async (req, res = response) => {
+    const { id } = req.params
     const category = await Category.findById(id).populate('user', 'name')
 
     res.json({ category })
 }
 
-const putCategory= async (req, res) => {
+const putCategory= async (req, res = response) => {
     const { id } = req.params
     const { status, user, ...body} = req.body
     
-    body.name = body.name.toUpperCase()
-    body.user = req.user.id
+    if ( body.name ) {
+        body.name = body.name.toUpperCase()
+    }
+    
+    body.user = req.user._id
+    console.log(req.user)
 
     const category = await Category.findByIdAndUpdate({ id, body }).populate('user', 'name')
 
     res.json({ category })
 }
 
-const deleteCategory= async (req, res) => {
+const deleteCategory= async (req, res = response) => {
     const { id } = req.params
-    const category = await Category.findByIdAndUpdate({ id, status: false }).populate('user', 'name')
+    const category = await Category.findByIdAndUpdate( id, { status: false } ).populate('user', 'name')
 
     res.json({ msg: 'Category deleted', category })
 }

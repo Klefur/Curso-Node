@@ -17,7 +17,7 @@ const { getUsers,
         putUser,
         deleteUser,
         patchUser 
-    } = require('../controllers/user')
+    } = require('../controllers/users')
     
 const router = Router()
 

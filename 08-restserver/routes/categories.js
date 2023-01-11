@@ -5,7 +5,7 @@ const { postCategory,
         getCategory, 
         getCategories, 
         deleteCategory, 
-        putCategory } = require('../controllers/category')
+        putCategory } = require('../controllers/categories')
 const { existeCategoryID } = require('../helpers/dbValidators')
 
 const router = Router()

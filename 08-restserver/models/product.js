@@ -1,10 +1,36 @@
 const { Schema, model } = require('mongoose')
 
-const RolSchema = Schema({
+const ProductSchema = Schema({
     name: {
         type: String,
-        required: [true, 'El rol es obligatorio']
-    }
+        required: [true, 'El nombre es obligatorio']
+    },
+    status: {
+        type: Boolean,
+        required: [true, 'El estado es obligatorio'],
+        default: true
+    },
+    price: {
+        type: Number,
+        default: 0
+    },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: 'User',
+        required: true
+    },
+    category: {
+        type: Schema.Types.ObjectId,
+        ref: 'Category',
+        required: true
+    },
+    description: { type: String },
+    available: { type: Boolean, default: true } 
 })
 
-module.exports = model( 'Rol', RolSchema )
+ProductSchema.methods.toJSON = function() {
+    const { __v, ...product } = this.toObject()
+    return product
+}
+
+module.exports = model( 'Product', ProductSchema )

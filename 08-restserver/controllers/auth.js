@@ -38,12 +38,14 @@ const googleSignIn = async (req, res = response) => {
         
         let user = await User.findOne({ email })
 
+        const encryptPass = bcrypt.hash( 'google', 10 )
+
         if ( !user ) {
             const data = {
                 name,
                 email,
                 img,
-                password: 'google',
+                password: encryptPass,
                 google: true,
             }
 

@@ -8,7 +8,7 @@ const CategorySchema = Schema({
     status: {
         type: Boolean,
         required: true,
-        default: false
+        default: true
     },
     user: {
         type: Schema.Types.ObjectId,
