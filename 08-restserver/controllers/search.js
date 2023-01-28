@@ -10,10 +10,11 @@ const collections = [
 ]
 
 const searchUsers = async (item = '', res = response) => {
+
     const isValidID = isValidObjectId(item)
 
     if ( isValidID ) {
-        const user = User.findById(id)
+        const user = await User.findById(id)
         return res.json({
             result: user ? [ user ] : []
         })
@@ -21,7 +22,7 @@ const searchUsers = async (item = '', res = response) => {
 
     const regex = RegExp(item, 'i')
 
-    const users = User.find({
+    const users = await User.find({
         $or: [{ name: regex }, { email: regex }],
         $and: [{ status: true }]
     })
@@ -32,10 +33,11 @@ const searchUsers = async (item = '', res = response) => {
 }
 
 const searchProducts = async (item = '', res = response) => {
+
     const isValidID = isValidObjectId(item)
 
     if ( isValidID ) {
-        const product = Product.findById(id)
+        const product = await Product.findById(id)
                         .populate('category', 'name')
         return res.json({
             result: product ? [ product ] : []
@@ -44,7 +46,7 @@ const searchProducts = async (item = '', res = response) => {
 
     const regex = RegExp(item, 'i')
 
-    const products = Product.find({
+    const products = await Product.find({
         $or: [{ name: regex }, { available: item }],
         $and: [{ status: true }]
     })
@@ -56,10 +58,11 @@ const searchProducts = async (item = '', res = response) => {
 }
 
 const searchCategories = async (item = '', res = response) => {
+
     const isValidID = isValidObjectId(item)
 
     if ( isValidID ) {
-        const category = Category.findById(id)
+        const category = await Category.findById(id)
         return res.json({
             result: category ? [ category ] : []
         })
@@ -67,7 +70,7 @@ const searchCategories = async (item = '', res = response) => {
 
     const regex = RegExp(item, 'i')
 
-    const categories = Category.find({
+    const categories = await Category.find({
         name: regex,
         status: true
     })    
@@ -79,6 +82,7 @@ const searchCategories = async (item = '', res = response) => {
 
 
 const search = async (req, res = response) => {
+    
     const { collection, item } = req.params
 
     if ( !collections.includes(collection) ) {

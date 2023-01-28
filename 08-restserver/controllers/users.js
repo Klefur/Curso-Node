@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt')
 const { User } = require('../models')
 
 const getUsers = async (req, res = response) => {
+    
     const { page=1, page_size=10 } = req.query
     const estado = { status: true }
     
@@ -17,6 +18,7 @@ const getUsers = async (req, res = response) => {
 }
 
 const getUser = async (req, res = response) => {
+
     const { id } = req.params
     const user = await User.findById(id)
 
@@ -40,6 +42,7 @@ const postUser = async (req, res = response) => {
 }
 
 const putUser = async (req, res = response) => {
+
     const { id } = req.params   
     const { _id, password, google, ...resto} = req.body
     const encryptPass = await bcrypt.hash( password, 10 )
@@ -51,6 +54,7 @@ const putUser = async (req, res = response) => {
 }
 
 const deleteUser = async (req, res = response) => {
+
     const { id } = req.params
 
     const user = await User.findByIdAndUpdate(id, { status: false })

@@ -6,6 +6,7 @@ const { generarJWT } = require('../helpers/generar-jwt')
 const { googleVerify } = require('../helpers/google-verify')
 
 const login = async (req = request, res = response) => {
+
     const { email, password } = req.body
     try{
         const user = await User.findOne({ email })
@@ -31,6 +32,7 @@ const login = async (req = request, res = response) => {
 }
 
 const googleSignIn = async (req, res = response) => {
+    
     const { id_token } = req.body
 
     try {

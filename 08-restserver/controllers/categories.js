@@ -30,8 +30,8 @@ const getCategories= async (req, res = response) => {
     const estado = { status: true }
 
     const [ total, categories ] = await Promise.all([
-        User.count( estado ),
-        User.find( estado )
+        Category.count( estado ),
+        Category.find( estado )
             .populate('user', 'name')
             .limit( Number( page_size ) )
             .skip( Number( page_size ) * ( Number( page ) - 1) )

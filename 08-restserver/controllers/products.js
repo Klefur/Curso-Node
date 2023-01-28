@@ -28,6 +28,7 @@ const postProduct = async (req, res = response) => {
 }
 
 const getProducts= async (req, res) => {
+    
     const { page=1, page_size=10 } = req.query
     const estado = { status: true }
 
@@ -47,6 +48,7 @@ const getProducts= async (req, res) => {
 }
 
 const getProduct= async (req, res) => {
+    
     const { id } = req.params
 
     console.log(id)
@@ -58,6 +60,7 @@ const getProduct= async (req, res) => {
 }
 
 const putProduct= async (req, res) => {
+
     const { id } = req.params
     const { status, user, ...body} = req.body
     
@@ -74,6 +77,7 @@ const putProduct= async (req, res) => {
 }
 
 const deleteProduct= async (req, res) => {
+
     const { id } = req.params
     const category = await Product.findByIdAndUpdate( id, { status: false } )
         .populate('user', 'name')

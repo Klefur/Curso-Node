@@ -1,9 +1,10 @@
 require('dotenv').config()
 const express = require('express')
 const cors = require('cors')
-const { userRouter, authRouter, categoryRouter, productRouter } = require('../routes')
+const fileUpload = require('express-fileupload')
+2
+const { userRouter, authRouter, categoryRouter, productRouter, searchRouter, uploadRouter } = require('../routes')
 const { dbConnection } = require('../database/config')
-
 class Server {
 
     constructor(){
@@ -13,7 +14,8 @@ class Server {
             auth: '/api/auth',
             category: '/api/categories',
             product: '/api/products',
-            search: 'api/search'
+            search: '/api/search',
+            upload: '/api/upload'
         }
 
         // conexion DB
@@ -35,6 +37,11 @@ class Server {
         this.app.use( cors() )
         this.app.use( express.json() )
         this.app.use( express.static('public') )
+        this.app.use( fileUpload({
+            useTempFiles: true,
+            tempFileDir: '/tmp/',
+            createParentPath: true,
+        }))
     }
 
     routes() {
@@ -42,6 +49,8 @@ class Server {
         this.app.use(this.paths.auth, authRouter)
         this.app.use(this.paths.category, categoryRouter)
         this.app.use(this.paths.product, productRouter)
+        this.app.use(this.paths.search, searchRouter)
+        this.app.use(this.paths.upload, uploadRouter)
     }
 
     listen() {

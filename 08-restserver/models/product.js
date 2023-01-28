@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose')
+const { stringify } = require('uuid')
 
 const ProductSchema = Schema({
     name: {
@@ -13,6 +14,9 @@ const ProductSchema = Schema({
     price: {
         type: Number,
         default: 0
+    },
+    img: {
+        type: String
     },
     user: {
         type: Schema.Types.ObjectId,
