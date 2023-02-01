@@ -21,7 +21,7 @@ const subirArchivo = ( files, extensionesValidas = ['jpg', 'png', 'gif'], carpet
                 reject( err )
             }
             
-            resolve( uploadPath )
+            resolve( tempName )
         })
     })
 

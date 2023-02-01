@@ -8,6 +8,8 @@ const rolValidator = async ( rol = 'user' ) => {
     if ( !existeRol ) {
         throw new Error(`El rol ${rol} no es valido`)
     }
+
+    return true
 }
 
 const existeEmail = async ( email = '' ) => {
@@ -16,6 +18,8 @@ const existeEmail = async ( email = '' ) => {
     if ( existeEmail ) {
         throw new Error(`Ya existe el email ${email}`)
     }
+
+    return true
 }
 
 const existeUserID = async ( id = '' ) => {
@@ -24,6 +28,8 @@ const existeUserID = async ( id = '' ) => {
     if ( !existeUser ) {
         throw new Error(`No existe el usuario con id ${id}`)
     }
+
+    return true
 }
 
 const existeCategoryID = async ( id = '' ) => {
@@ -32,6 +38,8 @@ const existeCategoryID = async ( id = '' ) => {
     if ( !existeCategory ) {
         throw new Error(`No existe la categoria con id ${id}`)
     }
+
+    return true
 }
 
 const existeProductID = async ( id = '' ) => {
@@ -40,6 +48,8 @@ const existeProductID = async ( id = '' ) => {
     if ( !existeProduct ) {
         throw new Error(`No existe la producto con id ${id}`)
     }
+
+    return true
 }
 
 const collectionPermitida = (collection = '', collections = []) => {
@@ -47,6 +57,8 @@ const collectionPermitida = (collection = '', collections = []) => {
     if ( !collections.includes( collection ) ) {
         throw new Error(`La coleccion ${collection} no es permitida`)
     }
+
+    return true
 }
 
 module.exports = {

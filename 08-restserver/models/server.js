@@ -3,7 +3,12 @@ const express = require('express')
 const cors = require('cors')
 const fileUpload = require('express-fileupload')
 2
-const { userRouter, authRouter, categoryRouter, productRouter, searchRouter, uploadRouter } = require('../routes')
+const { userRouter,
+        authRouter, 
+        categoryRouter, 
+        productRouter, 
+        searchRouter, 
+        uploadRouter } = require('../routes')
 const { dbConnection } = require('../database/config')
 class Server {
 
